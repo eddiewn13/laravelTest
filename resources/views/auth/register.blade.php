@@ -6,17 +6,26 @@
         <div>
             <x-input-label for="username" :value="__('Username')" />
             <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus />
+            <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
 
                 <!-- Firstname -->
                 <div>
                     <x-input-label for="firstname" :value="__('First name')" />
                     <x-text-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" required autofocus />
+                    <x-input-error :messages="$errors->get('firstname')" class="mt-2" />
                 </div>
 
                 <div>
                     <x-input-label for="lastname" :value="__('Last name')" />
                     <x-text-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" required autofocus />
+                    <x-input-error :messages="$errors->get('lastname')" class="mt-2" />
+                </div>
+
+                <div>
+                    <x-input-label for="phonenumber" :value="__('Phone number')" />
+                    <x-text-input id="phonenumber" class="block mt-1 w-full" type="text" name="phonenumber" :value="old('phonenumber')" required autofocus />
+                    <x-input-error :messages="$errors->get('phonenumber')" class="mt-2" />
                 </div>
 
 

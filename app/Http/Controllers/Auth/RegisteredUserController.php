@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -31,17 +30,19 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'username' => ['required', 'string', 'max:255'],
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:'.User::class],
+            'firstname' => ['required', 'string', 'max:255','regex: /^[a-zA-Z\s]*$/'],
+            'lastname' => ['required', 'string', 'max:255', 'regex: /^[a-zA-Z\s]*$/'],
+            'phonenumber' => ['required', 'string', 'digits:10', 'startsWith:072,070,073,076,079','unique:'.User::class],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Rules\Password::min(8)->symbols()->letters()],
         ]);
 
         $user = User::create([
             'username' => $request->username,
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
+            'phonenumber' => $request->phonenumber,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

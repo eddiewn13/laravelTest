@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('username');
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('phonenumber')->default(1);
-            $table->bigInteger('role_id')->default(1);
+            $table->string('phonenumber');
+
+            $table->unsignedBigInteger('role_id')->default(1);
+            $table ->foreign('role_id')->references('id')->on('roles');
         });
     }
 
